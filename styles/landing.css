@@ -47,6 +47,15 @@ body.landing{
     transition-delay: 0.2s;
 }
 
+.point:hover{
+    transition-duration: 1s;
+    transition-delay: 2s;
+    color: cadetblue;
+    -webkit-transform: scaleX(1.2) translateY(3rem);
+    -moz-transform: scaleX(1.2) translateY(3rem);
+    transform: scaleX(1.2) translateY(3rem);
+}
+
 .point .point-title{
     font-size:1.25rem;
 }
