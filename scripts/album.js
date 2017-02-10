@@ -28,6 +28,22 @@ var albumMarconi = {
     ]
 };
 
+/* I need to add a toggle here*/
+
+var albumMadeUp = {
+    title: 'Unknown',
+    artist: 'Me I guess',
+    label: 'Prolly not a good one',
+    year: 'Right Now',
+    albumARTURL: 'assets/images/album_covers/Cat.jpg',
+    songs: [
+        {title: 'This is a picture of a cat I had in China', duration: '1:00'},
+        {title: 'He was an evil cat', duration: '2:00'},
+        {title: 'He did eventually run away', duration: '3:00'},
+        {title: 'But he is ok because he started a little cat gang to terrorize people with', duration: '4:00'}
+    ]  
+};
+
 var createSongRow = function(songNumber, songName, songLength){
     var template = 
         '<tr class = "album-view-song-item">'
