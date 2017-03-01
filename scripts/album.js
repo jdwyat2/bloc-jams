@@ -16,7 +16,7 @@ var clickHandler = function() {
 
     if (currentlyPlayingSongNumber !== null) {
         
-        var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+        var currentlyPlayingCell = getSongNumberCell (currentlyPlayingSongNumber);
         currentlyPlayingCell.html(currentlyPlayingSongNumber);
      }
 
@@ -24,7 +24,7 @@ var clickHandler = function() {
         
         $(this).html(pauseButtonTemplate);
         currentlyPlayingSongNumber = songNumber;
-        currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+        setSong(songNumber);
         updatePlayerBarSong();
     } else if (currentlyPlayingSongNumber === songNumber) {
     
@@ -59,10 +59,6 @@ var offHover = function(event) {
      $row.hover(onHover,offHover);
      return $row;
  };
-
-/* so the parseInt doesn't seem to be working. and it looks like when you look at the consolethere is a referenceError (song is not defined)*/
-
-
 
 var setCurrentAlbum = function(album) {
      
@@ -129,13 +125,13 @@ var nextSong = function (){
         currentSongIndex = 0;
     }
     
-    currentlyPlayingSongNumber = currentSongIndex + 1;
+    setSong(songNumber);
     currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
     
     updatePlayerBarSong();
     
     var lastSongNumber = getLastSongNumber(currentSongIndex);
-    var $nextSongNumberCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber +'"]');
+    var $nextSongNumberCell = getSongNumberCell (currentlyPlayingSongNumber);
     var $lastSongNumberCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
     
     $nextSongNumberCell.html(pauseButtonTemplate);
@@ -157,7 +153,7 @@ var previousSong = function (){
         currentSongIndex = currentAlbum.songs.length - 1;
     }
     
-    currentlyPlayingSongNumber = currentSongIndex + 1;
+    setSong(songNumber);
     currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
     
     updatePlayerBarSong();
@@ -165,12 +161,24 @@ var previousSong = function (){
     $('.main-controls .play-pause').html(playerBarPauseButton);
     
     var lastSongNumber = getLastSongNumber(currentSongIndex);
-    var $previousSongNumberCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+    var $previousSongNumberCell = getSongNumberCell (currentlyPlayingSongNumber);
     var $lastSongNumberCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
     
     $previousSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);
     
+};
+
+var setSong = function (songNumber){
+    currentlyPlayingSongNumber = parseInt(songNumber);
+    currentSongFromAlbum = currentAlbum.songs[songNumber-1];
+    
+    /* setSong(songNumber); */
+};
+
+var getSongNumberCell= function(number){
+    return $('.song-item-number[data-song-number="' + number +'"]');
+    /* getSongNumberCell (currentlyPlayingSongNumber); */
 };
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
