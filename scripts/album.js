@@ -226,6 +226,17 @@ var getSongNumberCell= function(number){
     /* getSongNumberCell (currentlyPlayingSongNumber); */
 };
 
+var updateSeekPercentage = function($seekBar, seekBarFillRatio){
+    var offsetXPercent = seekBarFillRatio * 100;
+    
+    offsetXPercent = Math.max(0, offsetXPercent);
+    offsetXPercent = Math.min(100,offsetXPercent);
+    
+    var percentageString = offsetXPercent + '%';
+    $seekBar.find('.fill').width(percentageString);
+    $seekBar.find('.fill').css({left: percentageString});
+};
+
 $(document).ready(function(){
     setCurrentAlbum(albumPicasso);
     
